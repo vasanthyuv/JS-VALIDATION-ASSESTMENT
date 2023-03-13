@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form {
+            display: inline-block;
+            color: aliceblue;
+            font-size: 17px;
+
+
+
+        }
+
+        #imag {
+            z-index: -1;
+
+        }
+
+        #fm {
+            position: absolute;
+            bottom: 100px;
+            left: 420px;
+            box-shadow: 2px 2px 4px 2px;
+            border-radius: 5px;
+        }
+
+        input {}
+    </style>
+</head>
+
+<body>
+
+    <img src="asset/pexels-pixabay-36717.jpg" id="imag">
+    <form action="" method="post" id="fm">
+        <fieldset>
+            <legend>Details</legend>
+            <label>Name</label>
+            <input type="text" id="name" required>
+            <br><br>
+            <label>Date of birth</label>
+            <input type="date" required value="dob" id="dob">
+            <br><br>
+            <label>Dender</label>
+            <input type="radio" id="gend" value="male" name="gend" required>male
+            <input type="radio" id="gend" value="female" name="gend" required>femle
+            <br><br>
+            <label>Qualification</label>
+            <input type="radio" required value="diplamo" id="qualification" name="qualification">diplamo
+            <input type="radio" required value="graduate" id="qualification" name="qualification">graduate
+            <input type="radio" required value="postgraduate" id="qualification" name="qualification">post graduate
+            <input type="radio" required value="professioanl" id="qualification" name="qualification">professional
+            <br><br>
+            <label>Mark scored</label>
+            <input type="number" required value="enter your mark" id="mark">
+            <br><br>
+            <label>Grade</label>
+            <select>
+                <optgroup id="grade" label="grade">
+                    <option value="a">a</option>
+                    <option value="a+">a+</option>
+                    <option value="b">b</option>
+                    <option value="b+">b+</option>
+                    <option value="c">c</option>
+                    <option value="c+">c+</option>
+                    <option value="d">d</option>
+                    <option value="e">e</option>
+                </optgroup>
+            </select>
+            <br><br>
+            <label>Languages known</label>
+            <input type="checkbox" id="tamil">
+            <label for="tamil">Tamil</label>
+            <input type="checkbox" id="english">
+            <label>English</label>
+            <input type="checkbox" id="french">
+            <label>french</label>
+            <br><br>
+            <label>address</label>
+            <textarea id="address"></textarea>
+            <br><br>
+            <label>mobile number</label>
+            <input type="number" max="10" id="mob" required value="number">
+            <br><br>
+            <label>mail id</label>
+            <input type="email" id="mail" required>
+            <br><br>
+            <input type="reset" value="reset">
+            <input type="button" onclick='validation()' value="submit">
+
+
+        </fieldset>
+    </form>
+    <script>
+        function validation() {
+            var name = document.getElementById('name').value;
+            var dob = document.getElementById('dob').value;
+            var gender = document.querySelector('input[name="gend"]:checked');
+            var qualifications = document.querySelector('input[name="qualification"]:checked');
+            var markscored = document.getElementById('mark').value;
+            var grades = document.getElementById('grade').value;
+            var tamil = document.getElementById('tamil').checked;
+            var english = document.getElementById('english').checked;
+            var french = document.getElementById('french').checked;
+            var addr = document.getElementById('address').value;
+            var mobile = document.getElementById('mob').value;
+            var email = document.getElementById('mail').value;
+
+
+            var words = /^[A-Za-z]+$/;
+            var symbol = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+
+            if (name == '') {
+                alert('Please enter your name');
+            } else if (!words.test(name)) {
+                alert('Name field required only alphabet characters');
+            } else if (email == '') {
+                alert('Please enter your user email id');
+            } else if (!symbol.test(email)) {
+                alert('Invalid email');
+            }
+            else if (mobile == "") {
+                alert('enter your mobile number');
+            }
+            else if (dob == "") {
+                alert('enter your date of birth')
+            }
+            else if (email == "") {
+                alert('enter your email');
+            }
+            else {
+                alert('Thank you for registering!');
+                display(name, dob, gender.value, qualifications.value, markscored, grades, tamil, english, french, addr, mobile, email);
+
+
+            }
+
+        }
+        function display(name, dob, gender, qualifications, markscored, grades, tamil, english, french, addr, mobile, email) {
+            document.write("<h2>Registration Details:</h2>");
+            document.write("<p><strong>Name:</strong> " + name + "</p>");
+            document.write("<p><strong>Date of Birth:</strong> " + dob + "</p>");
+            document.write("<p><strong>Gender:</strong> " + gender + "</p>");
+            document.write("<p><strong>qualification:</strong>" + qualifications + "</P>");
+            document.write("<p><strong>markscored:</strong>" + markscored + "</P>");
+            document.write("<p><strong>grade:</strong>" + grades + "</P>");
+            document.write("<p><strong>address:</strong>" + addr + "</P>");
+            document.write("<p><strong>mobile number:</strong>" + mobile + "</P>");
+            document.write("<p><strong>email:</strong>" + email + "</P>");
+            document.write("<P><strong>known language:</strong></p>");
+
+            if (tamil) {
+                document.write("<p>Tamil</p>");
+            }
+            if (english) {
+                document.write("<p>English</p>");
+            }
+            if (french) {
+                document.write("<p>French</p>");
+            }
+
+            document.write("<p><strong>current age:</strong age:</p>")
+            var d1 = new Date(dob);
+            var diff = Date.now() - d1.getTime();
+            var daydiff = (diff / 31536000000).toFixed(0);
+            document.write(daydiff);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+    </script>
+</body>
+
+</html>
